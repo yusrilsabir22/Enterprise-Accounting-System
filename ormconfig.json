@@ -1,0 +1,14 @@
+{
+   "type": "postgres",
+   "host": "localhost",
+   "port": 5432,
+   "username": "postgres",
+   "password": "admin",
+   "database": "enterprise_accounting_system",
+   "entities": ["dist/entities/*.js"],
+   "migrations": ["dist/migration/*.js"],
+   "cli": {
+      "entitiesDir": "dist/entities",
+      "migrationsDir": "src/migration"
+   }
+}
