@@ -3,9 +3,10 @@ import { MyContext } from "src/types";
 import { AuthChecker} from "type-graphql";
 export const isAuth: AuthChecker<MyContext> = async ({context}, roles): Promise<boolean> => {
     let auth = false
+    console.log(context.req.session)
     const user = await User.find({relations: ['roles'], where: {id: context.req.session.userId}});
     if(!user[0]) {
-        throw new Error('not authenticated')
+        throw new Error('not authenticated bro')
     } else {
         auth = roles.includes(user[0].roles.title)
         if(!auth) {

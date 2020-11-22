@@ -1,14 +1,14 @@
 {
-   "type": "postgres",
-   "host": "localhost",
-   "port": 5432,
-   "username": "postgres",
-   "password": "admin",
-   "database": "saas_sistem",
-   "entities": ["dist/entities/*.js"],
-   "migrations": ["dist/migration/*.js"],
-   "cli": {
-      "entitiesDir": "dist/entities",
-      "migrationsDir": "src/migration"
-   }
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "myuser",
+    "password": "mypass",
+    "database": "saas_system",
+    "entities": ["dist/entities/*.js"],
+    "migrations": ["dist/migration/*.js"],
+    "cli": {
+        "entitiesDir": "dist/entities",
+        "migrationsDir": "src/migration"
+    }
 }

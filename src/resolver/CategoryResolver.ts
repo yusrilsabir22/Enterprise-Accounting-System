@@ -23,7 +23,7 @@ export class CategoryResolver {
         return results
     }
 
-    @Authorized(['owner', 'admin warehouse'])
+    // @Authorized(['owner', 'admin warehouse'])
     @Mutation(() => CategoryResponse)
     async insertNewCategory(
         @Arg("name") name: string,
