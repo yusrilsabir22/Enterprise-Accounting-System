@@ -10,7 +10,7 @@ export class Role extends BaseEntity {
     @PrimaryGeneratedColumn()
     id!: number;
     
-    @Field()
+    @Field(() => String, {nullable: true})
     @Column()
     title: string;
 

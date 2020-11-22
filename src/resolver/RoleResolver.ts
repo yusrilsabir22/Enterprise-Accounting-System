@@ -1,10 +1,8 @@
 import 'reflect-metadata';
 import { Role } from './../entities/Role';
-import { MyContext, FieldError } from './../types';
-import { Arg, Ctx, Field, Mutation, ObjectType, Query, Resolver } from "type-graphql";
+import { FieldError } from './../types';
+import { Arg, Authorized, Field, Mutation, ObjectType, Query, Resolver } from "type-graphql";
 import { getConnection } from 'typeorm';
-
-
 
 @ObjectType()
 class RoleResponse {
@@ -12,19 +10,19 @@ class RoleResponse {
   errors?: FieldError[];
 
   @Field(() => Role, { nullable: true })
-  role?: Role;
+  role?: Role[];
 }
 
 @Resolver(Role)
 export class RoleResolver {
+    @Authorized(['owner'])
     @Query(() => [Role])
-    async getRoles(@Ctx() {req}: MyContext) {
-        console.log(req.session)
+    async getRoles() {
         let results = await Role.find({relations: ['users'], where: {}})
-        console.log(results)
         return results
     }
 
+    // @Authorized(['owner'])
     @Mutation(() => RoleResponse)
     async insertNewRole(
         @Arg("title") title: string

@@ -1,7 +1,7 @@
 import 'reflect-metadata';
 import { Category } from './../entities/Category';
 import { FieldError } from './../types';
-import { Arg, Field, Mutation, ObjectType, Query, Resolver } from "type-graphql";
+import { Arg, Authorized, Field, Mutation, ObjectType, Query, Resolver } from "type-graphql";
 // import { getConnection } from 'typeorm';
 
 @ObjectType()
@@ -16,12 +16,14 @@ class CategoryResponse {
 
 @Resolver(Category)
 export class CategoryResolver {
+    @Authorized(['owner', 'admin warehouse'])
     @Query(() => [Category])
     async getCategories() {
         let results = await Category.find({relations: ['product'], where: {}})
         return results
     }
 
+    @Authorized(['owner', 'admin warehouse'])
     @Mutation(() => CategoryResponse)
     async insertNewCategory(
         @Arg("name") name: string,

@@ -1,11 +1,11 @@
 
 import { Field, ObjectType, ID } from 'type-graphql';
-import { BaseEntity, Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn, UpdateDateColumn } from "typeorm";
+import { BaseEntity, Column, CreateDateColumn, Entity, JoinColumn, ManyToOne, PrimaryColumn, UpdateDateColumn } from "typeorm";
 import { Product } from './Product';
 
 @ObjectType()
 @Entity()
-export class Category extends BaseEntity {
+export class File extends BaseEntity {
     @Field(() => ID)
     @PrimaryColumn()
     id!: string;
@@ -14,9 +14,13 @@ export class Category extends BaseEntity {
     @Column()
     name: string;
 
-    @Field(() => [Product], {nullable: true})
-    @OneToMany(() => Product, (product) => product.category)
-    product: Product[];
+    @Field()
+    @Column()
+    location: string;
+
+    @Field(() => Product, {nullable: true})
+    @ManyToOne(() => Product, (product) => product.files)
+    product: Product;
 
     @Field(() => String)
     @CreateDateColumn()
